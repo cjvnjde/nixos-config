@@ -28,6 +28,7 @@
     fzf # A command-line fuzzy finder
 
     firefox-devedition
+    jetbrains-toolbox
   ];
 
   programs.git = {
