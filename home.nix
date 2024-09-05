@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+
   home.username = "cjvnjde";
   home.homeDirectory = "/home/cjvnjde";
 
@@ -25,6 +26,8 @@
     jq # A lightweight and flexible command-line JSON processor
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
+
+    firefox-devedition
   ];
 
   programs.git = {
@@ -32,7 +35,6 @@
     userName = "Vitalij Nykyforenko";
     userEmail = "vitalij.nykyforenko@gmail.com";
   };
-
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
