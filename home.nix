@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
 
@@ -61,6 +61,10 @@
       macos_option_as_alt = true; # Option key acts as Alt on macOS
       enable_audio_bell = false;
     };
+  };
+
+  programs.neovim = {
+    enable = true;
   };
 
   # This value determines the home Manager release that your
