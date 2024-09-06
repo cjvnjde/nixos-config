@@ -112,6 +112,8 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   # List services that you want to enable:
 

@@ -19,6 +19,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.verbose = true;
 
             home-manager.users.cjvnjde = import ./home.nix;
 
