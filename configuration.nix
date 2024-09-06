@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -15,6 +15,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
+
+  security.polkit.enable = true;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -43,13 +45,22 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+#  services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+#  services.xserver.displayManager.gdm.enable = false;
+#  services.xserver.desktopManager.gnome.enable = false;
+#  services.displayManager.ly.enable = true;
+  services.greetd = {                                                      
+    enable = true;                                                         
+    settings = {                                                           
+      default_session = {                                                  
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+      };                                                                   
+    };                                                                     
+  };
 
-  # Configure keymap in X11
+# Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "dvorak";

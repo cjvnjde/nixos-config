@@ -14,6 +14,34 @@
 #   recursive = true;   # link recursively
 #   executable = true;  # make all files executable
 # };
+  wayland.windowManager.sway = {
+    enable = true;
+    config = rec {
+      terminal = "kitty";
+      modifier = "Mod4";
+      menu = "\"rofi -monitor 1 -combi-modes drun,run -show combi -show-icons\"";
+      keybindings = let
+        modifier = config.wayland.windowManager.sway.config.modifier;
+        menu = config.wayland.windowManager.sway.config.menu;
+      in lib.mkOptionDefault {
+        "${modifier}+w" = "exec ${menu}";
+        "${modifier}+d" = "layout tabbed";
+        "${modifier}+n" = "exec \"rofi -monitor 1 -show calc\"";
+      };
+    };
+    extraConfig = ''
+output HDMI-A-1 resolution 1920x1080 position 0,0
+output DP-1 resolution 2560x1440 position 1920,0
+
+input "type:keyboard" {
+    xkb_layout us,ru
+    xkb_variant dvorak,
+    xkb_options grp:win_space_toggle
+}
+'';
+  };
+
+
   fonts.fontconfig.enable = true;
 
 # Packages that should be installed to the user profile.
@@ -57,6 +85,11 @@
     userEmail = "vitalij.nykyforenko@gmail.com";
   };
 
+  programs.rofi = {
+    enable = true;
+    terminal = "kitty";
+    plugins = with pkgs; [ rofi-calc ];
+  };
   programs.kitty = {
     enable = true;
 # kitty has catppuccin theme built-in,
