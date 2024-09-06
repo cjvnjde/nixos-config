@@ -14,12 +14,13 @@
 #   recursive = true;   # link recursively
 #   executable = true;  # make all files executable
 # };
+  fonts.fontconfig.enable = true;
 
 # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
 # archives
-    zip
-    unzip
+      zip
+      unzip
 
 # utils
       ripgrep # recursively searches directories for a regex pattern
@@ -43,8 +44,13 @@
 # messaging
       slack
       telegram-desktop
+
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
+#
+      #nerdfonts.override { fonts = [ "FiraCode" ]; }
+#
   programs.git = {
     enable = true;
     userName = "Vitalij Nykyforenko";
@@ -58,7 +64,7 @@
 # and it's installed by home-manager if `theme` is specified.
     theme = "Catppuccin-Mocha";
     font = {
-      name = "FiraCode Nerd Font";
+      name = "FiraCode";
     };
 
 # consistent with wezterm
@@ -93,15 +99,15 @@
     };
 
     plugins = [
-        {
-          name = "atuin";
-          src = pkgs.fetchFromGitHub {
-            owner = "atuinsh";
-            repo = "atuin";
-            rev = "main";
-            sha256 = "09j99q2ialcrhqs03661bd2gnqsjrfksj1c0bqii51mjjiml8pbq";
-          };
-        }
+    {
+      name = "atuin";
+      src = pkgs.fetchFromGitHub {
+        owner = "atuinsh";
+        repo = "atuin";
+        rev = "main";
+        sha256 = "09j99q2ialcrhqs03661bd2gnqsjrfksj1c0bqii51mjjiml8pbq";
+      };
+    }
     ];
 
     oh-my-zsh = {
