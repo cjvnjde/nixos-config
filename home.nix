@@ -38,6 +38,7 @@
 # development
       nodejs_22
       bun
+      pnpm
 
 # messaging
       slack
