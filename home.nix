@@ -28,7 +28,7 @@
     fzf # A command-line fuzzy finder
 
     firefox-devedition
-    jetbrains-toolbox
+    jetbrains.idea-ultimate
     flameshot
     
     # messaging
@@ -66,6 +66,8 @@
   programs.neovim = {
     enable = true;
   };
+
+
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
