@@ -35,6 +35,10 @@
       bat
       atuin
 
+# development
+      nodejs_22
+      bun
+
 # messaging
       slack
       telegram-desktop
