@@ -128,6 +128,9 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Enabele APC UPS daemon.
+  services.apcupsd.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

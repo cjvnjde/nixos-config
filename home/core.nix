@@ -2,6 +2,7 @@
 
   imports = [
     ./sway
+    ./waybar
   ];
 
   home = {
@@ -50,6 +51,8 @@
 # messaging
       slack
       telegram-desktop
+
+      playerctl
 
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];

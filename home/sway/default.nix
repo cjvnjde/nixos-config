@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: {
   home.file."${config.xdg.configHome}/sway/assets/bg.jpg".source = ./assets/bg.jpg;
@@ -112,20 +113,7 @@
         };
         background = "${base}";
       };
-      bars = [
-          {
-              colors = {
-                background = "${base}";
-                statusline = "${overlay0}";
-                activeWorkspace = { border = "#f2eff3"; background = "#f2eff3"; text = "#000000"; };
-                focusedWorkspace = { border = "#6aaeff"; background = "#6aaeff"; text = "#000000"; };
-                inactiveWorkspace = { border = "#ffffff"; background = "#ffffff"; text = "#000000"; };
-                urgentWorkspace = { border = "#ff8892"; background = "#ff8892"; text = "#000000"; };
-              };
-              fonts = { names = [ "Fira Code" ]; };
-              position = "top";
-          }
-       ];
+      bars = [{command = "${pkgs.waybar}/bin/waybar";}];
     };
     extraConfig = ''
         workspace 9 output HDMI-A-1
