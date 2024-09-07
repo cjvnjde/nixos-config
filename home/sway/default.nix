@@ -74,6 +74,8 @@
         "${modifier}+w" = "exec ${menu}";
         "${modifier}+d" = "layout tabbed";
         "${modifier}+n" = "exec ${calc}";
+        "${modifier}+Shift+f" = "floating toggle";
+        "${modifier}+t" = "focus mode_toggle";
       };
       colors = {
         focused = {
