@@ -4,6 +4,7 @@
     ./sway
     ./waybar
     ./rofi
+    ./bat
   ];
 
   home = {
@@ -41,7 +42,6 @@
       flameshot
 
       thefuck
-      bat
       atuin
 
 # development
@@ -105,7 +105,7 @@
       ls = "eza --tree --level=1 --icons=always";
       cd = "z";
       ci = "zi";
-      cat = "bat -p --theme='Catppuccin Mocha'";
+      cat = "bat -p";
     };
 
     plugins = [
