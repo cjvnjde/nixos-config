@@ -11,7 +11,10 @@
 
   programs.waybar = {
     enable = true;
-    systemd.enable = true;
+    systemd = {
+      enable = true;
+      target = "sway-session.target";
+    };
     style = ./assets/waybar_style.css;
     settings = {
       main = {
