@@ -3,6 +3,7 @@
   imports = [
     ./sway
     ./waybar
+    ./rofi
   ];
 
   home = {
@@ -66,11 +67,6 @@
     userEmail = "vitalij.nykyforenko@gmail.com";
   };
 
-  programs.rofi = {
-    enable = true;
-    terminal = "kitty";
-    plugins = with pkgs; [ rofi-calc ];
-  };
   programs.kitty = {
     enable = true;
 # kitty has catppuccin theme built-in,
