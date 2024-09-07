@@ -4,7 +4,10 @@
   pkgs,
   ...
 }: {
-  home.file."${config.xdg.configHome}/waybar/scripts/ups_status.sh".source = ./scripts/ups_status.sh;
+  home.file."${config.xdg.configHome}/waybar/scripts" = {
+    source = ./scripts;
+    recursive = true;
+  };
 
   programs.waybar = {
     enable = true;
@@ -16,7 +19,7 @@
          output = "DP-1";
          modules-left = ["sway/workspaces" "sway/mode" "sway/scratchpad" "custom/media"];
          modules-center = ["sway/window"];
-         modules-right = [ "custom/music" "tray" "custom/ups" "idle_inhibitor" "pulseaudio" "clock"];
+         modules-right = [ "custom/music" "tray" "custom/ups" "custom/dunst" "idle_inhibitor" "pulseaudio" "clock"];
          "sway/mode" = {
            format = "<span style=\"italic\">{}</span>";
          };
@@ -64,6 +67,12 @@
         "custom/music"= {
           interval= 5;
           "exec"= "playerctl metadata --format '{{status}}|{{artist}}|{{title}}'";
+        };
+        "custom/dunst" = {
+          format = "{}";
+          interval = 5;
+          "exec"= "bash -c 'if dunstctl is-paused | grep -q true; then echo \"\"; else echo \"\"; fi'";
+          "on-click"= "${config.xdg.configHome}/waybar/scripts/toggle_dunst.sh";
         };
       };
       second = {
