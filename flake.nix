@@ -14,7 +14,11 @@
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      nixos = let
+        username = "cjvnjde";
+        specialArgs = {inherit username;};
+      in nixpkgs.lib.nixosSystem {
+        inherit specialArgs;
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
@@ -24,9 +28,8 @@
             home-manager.useUserPackages = true;
             home-manager.verbose = true;
 
-            home-manager.users.cjvnjde = import ./home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+            home-manager.extraSpecialArgs = inputs // specialArgs;
+            home-manager.users.${username} = import ./home/core.nix;
           }
         ];
       };

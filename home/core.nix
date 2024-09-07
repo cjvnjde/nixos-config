@@ -1,9 +1,10 @@
-{ config, pkgs, lib, users, ... }:
+{ config, pkgs, lib, users, username, ... }:
 
 {
-
-  home.username = "cjvnjde";
-  home.homeDirectory = "/home/cjvnjde";
+  home = {
+    inherit username;
+    homeDirectory = "/home/${username}";
+  };
 
 # link the configuration file in current directory to the specified location in home directory
 # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
