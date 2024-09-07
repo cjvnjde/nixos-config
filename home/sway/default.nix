@@ -5,6 +5,7 @@
   ...
 }: {
   home.file."${config.xdg.configHome}/sway/assets/bg.jpg".source = ./assets/bg.jpg;
+  home.file."${config.xdg.configHome}/sway/kill_waybar_no_tty.sh".source = ./kill_waybar_no_tty.sh;
 
   wayland.windowManager.sway = let
     # Catpuccin mocha
@@ -38,6 +39,12 @@
     enable = true;
     checkConfig = false;
     config = rec {
+      startup = [
+        {
+        command = "sh ${config.xdg.configHome}/sway/kill_waybar_no_tty.sh";
+        always = true;
+         }
+      ];
       terminal = "kitty";
       modifier = "Mod4"; # win key
       left = "h";
