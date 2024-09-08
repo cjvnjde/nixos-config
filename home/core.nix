@@ -23,14 +23,33 @@
 #   executable = true;  # make all files executable
 # };
 
+flameshotGrim = pkgs.flameshot.overrideAttrs (oldAttrs: {
+    src = pkgs.fetchFromGitHub {
+      owner = "flameshot-org";
+      repo = "flameshot";
+      rev = "master";
+      sha256 = "1pvbdf9miywcha2hr9drkv99hz2kj0jjp777d67g7h9dvdlpvky4";
+    };
+    cmakeFlags = [
+      "-DUSE_WAYLAND_CLIPBOARD=1"
+      "-DUSE_WAYLAND_GRIM=1"
+    ];
+    buildInputs = oldAttrs.buildInputs ++ [ pkgs.libsForQt5.kguiaddons ];
+  });
 
+services.flameshot = {
+  enable = true;
+  package = flameshotGrim;
+};
   fonts.fontconfig.enable = true;
-
 # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
 # archives
       zip
       unzip
+      grim
+      slurp
+
 
 # utils
       ripgrep # recursively searches directories for a regex pattern
@@ -40,9 +59,10 @@
       firefox-devedition
       jetbrains-toolbox
 
-
+      tldr
       thefuck
       atuin
+      mpv
 
 # development
       nodejs_22
