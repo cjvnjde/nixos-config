@@ -95,7 +95,7 @@
   users.users.cjvnjde = {
     isNormalUser = true;
     description = "Vitalij Nykyforenko";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -130,6 +130,8 @@
 
   # Enabele APC UPS daemon.
   services.apcupsd.enable = true;
+
+  virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
