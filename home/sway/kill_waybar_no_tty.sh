@@ -1,7 +1,5 @@
 #!/bin/sh
 
-sleep 1
-
 # Find the Waybar process that doesn't have a TTY and kill it
 waybar_pid=$(ps aux | grep waybar | grep -v tty | grep -v grep | awk '{print $2}')
 

@@ -7,7 +7,7 @@
   home.file."${config.xdg.configHome}/rofi/theme.rasi".source = ./theme.rasi;
 
   programs.rofi = let
-  inherit (config.lib.formats.rasi) mkLiteral;
+    inherit (config.lib.formats.rasi) mkLiteral;
   in {
     enable = true;
     cycle = true;

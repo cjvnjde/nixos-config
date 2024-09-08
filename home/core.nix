@@ -5,6 +5,7 @@
     ./waybar
     ./rofi
     ./bat
+    ./nvim
   ];
 
   home = {
@@ -128,11 +129,6 @@
       enable_audio_bell = false;
       confirm_os_window_close = 0;
     };
-  };
-
-  programs.neovim = {
-    enable = true;
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
   };
 
   programs.zoxide.enable = true;
