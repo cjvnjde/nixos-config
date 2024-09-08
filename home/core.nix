@@ -49,6 +49,7 @@
       bun
       pnpm
 
+      wl-clipboard
 # messaging
       slack
       telegram-desktop
