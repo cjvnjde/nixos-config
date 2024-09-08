@@ -10,9 +10,11 @@
     recursive = true;
   };
 
- home.activation.lazy-lock = lib.mkAfter ''
-     chmod u+w ${config.xdg.configHome}/nvim/lazy-lock.json
-  '';
+# home.activation.lazy-lock = lib.mkAfter ''
+#     rm ${config.xdg.configHome}/nvim/lazy-lock.json
+#     cp ${./config/lazy-lock.json} ${config.xdg.configHome}/nvim/lazy-lock.json
+#     chmod u+w ${config.xdg.configHome}/nvim/lazy-lock.json
+#  '';
 
   programs.neovim = {
     enable = true;
