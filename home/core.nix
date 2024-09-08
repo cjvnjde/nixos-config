@@ -1,4 +1,4 @@
-{ config, pkgs, lib, users, username, ... }: {
+{ inputs, config, pkgs, lib, users, username, ... }: {
 
   imports = [
     ./sway
@@ -132,6 +132,7 @@
 
   programs.neovim = {
     enable = true;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
   };
 
   programs.zoxide.enable = true;

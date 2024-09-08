@@ -10,13 +10,14 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       nixos = let
         username = "cjvnjde";
-        specialArgs = {inherit username;};
+        specialArgs = {inherit username; inherit inputs;};
       in nixpkgs.lib.nixosSystem {
         inherit specialArgs;
         system = "x86_64-linux";
