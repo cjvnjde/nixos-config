@@ -38,8 +38,8 @@
       eza # A modern replacement for ‘ls’
 
       firefox-devedition
-      jetbrains.idea-ultimate
-      flameshot
+      jetbrains-toolbox
+
 
       thefuck
       atuin
