@@ -72,9 +72,7 @@
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
-  programs.fzf = {
-    enable = true;
-  };
+  programs.fzf.enable = true;
 
   programs.git = {
     enable = true;
