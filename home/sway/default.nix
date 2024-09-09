@@ -128,8 +128,9 @@
     extraConfig = ''
         workspace 9 output HDMI-A-1
         set $screenshots_pat $HOME/Pictures
-        set $screenshot 'XDG_CURRENT_DESKTOP=Sway QT_QPA_PLATFORM=wayland flameshot gui --clipboard --path $screenshots_path'
-        for_window [title="flameshot" app_id="flameshot"] fullscreen enable global
+        set $screenshot 'grim -g "$(slurp)" - | wl-copy'
+        # set $screenshot 'XDG_CURRENT_DESKTOP=Sway QT_QPA_PLATFORM=wayland flameshot gui --clipboard --path $screenshots_path'
+        # for_window [title="flameshot" app_id="flameshot"] fullscreen enable global
     '';
    extraSessionCommands = ''
       export XDG_SESSION_TYPE=wayland
