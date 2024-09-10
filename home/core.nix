@@ -23,7 +23,6 @@
 #   executable = true;  # make all files executable
 # };
 
-  fonts.fontconfig.enable = true;
 # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
 # archives
@@ -39,7 +38,7 @@
       jq # A lightweight and flexible command-line JSON processor
       eza # A modern replacement for ‘ls’
 
-      firefox-devedition
+      
       jetbrains-toolbox
 
       tldr
@@ -69,9 +68,14 @@
       source-han-sans
       source-han-sans-japanese
       source-han-serif-japanese
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      nerdfonts
   ];
 
+programs.firefox = {
+  enable = true;
+  package = pkgs.firefox-devedition;
+};
+programs.chromium.enable = true;
   programs.fzf.enable = true;
 
   programs.git = {
