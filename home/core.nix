@@ -11,6 +11,12 @@
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
+
+    sessionVariables = {
+  XDG_CURRENT_DESKTOP = "sway"; 
+      DEFAULT_BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+      BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+    };
   };
 
 # link the configuration file in current directory to the specified location in home directory
@@ -22,7 +28,6 @@
 #   recursive = true;   # link recursively
 #   executable = true;  # make all files executable
 # };
-
 # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
 # archives
@@ -30,6 +35,10 @@
       unzip
       grim
       slurp
+
+      file
+      xfce.thunar
+      lf
 
       #flameshot
 
@@ -75,7 +84,9 @@ programs.firefox = {
   enable = true;
   package = pkgs.firefox-devedition;
 };
+
 programs.chromium.enable = true;
+
   programs.fzf.enable = true;
 
   programs.git = {

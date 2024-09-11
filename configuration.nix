@@ -114,6 +114,21 @@
     gcc
   ];
 
+
+xdg.mime.defaultApplications = {
+  "text/html" = "firefox-devedition.desktop";
+  "x-scheme-handler/http" = "firefox-devedition.desktop";
+  "x-scheme-handler/https" = "firefox-devedition.desktop";
+  "x-scheme-handler/about" = "firefox-devedition.desktop";
+  "x-scheme-handler/unknown" = "firefox-devedition.desktop";
+};
+
+    environment.sessionVariables = {
+  XDG_CURRENT_DESKTOP = "sway"; 
+      DEFAULT_BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+      BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+    };
+
 programs.steam = {
   enable = true;
   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play

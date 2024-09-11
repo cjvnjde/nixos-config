@@ -28,7 +28,6 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.verbose = true;
-
             home-manager.extraSpecialArgs = inputs // specialArgs;
             home-manager.users.${username} = import ./home/core.nix;
           }
