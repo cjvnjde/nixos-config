@@ -2,10 +2,10 @@
 
   imports = [
     ./sway
-    ./waybar
-    ./rofi
-    ./bat
-    ./nvim
+      ./waybar
+      ./rofi
+      ./bat
+      ./nvim
   ];
 
   home = {
@@ -13,12 +13,33 @@
     homeDirectory = "/home/${username}";
 
     sessionVariables = {
-  XDG_CURRENT_DESKTOP = "sway"; 
+      XDG_CURRENT_DESKTOP = "sway"; 
       DEFAULT_BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
       BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
     };
-  };
 
+    pointerCursor = 
+      let 
+      getFrom = url: hash: name: {
+        gtk.enable = true;
+        x11.enable = true;
+        name = name;
+        size = 22;
+        package = 
+          pkgs.runCommand "moveUp" {} ''
+          mkdir -p $out/share/icons
+          ln -s ${pkgs.fetchzip {
+            url = url;
+            hash = hash;
+          }} $out/share/icons/${name}
+        '';
+      };
+    in
+      getFrom 
+      "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic.tar.xz"
+      "sha256-2Fd0OVSCgFZVLRAVo/MxgHp1qK5WUNhKY685XPYrBmk="
+      "Bibata-Modern-Classic";
+  };
 # link the configuration file in current directory to the specified location in home directory
 # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
 
@@ -31,23 +52,24 @@
 # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
 # archives
-      zip
+    zip
       unzip
       grim
       slurp
+      openssl
 
       file
       xfce.thunar
       lf
 
-      #flameshot
+#flameshot
 
 # utils
       ripgrep # recursively searches directories for a regex pattern
       jq # A lightweight and flexible command-line JSON processor
       eza # A modern replacement for ‘ls’
 
-      
+
       jetbrains-toolbox
 
       tldr
@@ -68,7 +90,7 @@
       playerctl
 
 
-    figma-linux
+      figma-linux
 
       noto-fonts
       noto-fonts-cjk
@@ -78,14 +100,14 @@
       source-han-sans-japanese
       source-han-serif-japanese
       nerdfonts
-  ];
+      ];
 
-programs.firefox = {
-  enable = true;
-  package = pkgs.firefox-devedition;
-};
+  programs.firefox = {
+    enable = true;
+    package = pkgs.firefox-devedition;
+  };
 
-programs.chromium.enable = true;
+  programs.chromium.enable = true;
 
   programs.fzf.enable = true;
 
@@ -118,20 +140,20 @@ programs.chromium.enable = true;
           plus-style = "syntax #2c3239";
           map-styles = ''
             bold purple => syntax "#494060",
-            bold blue => syntax "#384361",
-            bold cyan => syntax "#384d5d",
-            bold yellow => syntax "#544f4e"
-            '';
-          # Should match the name of the bat theme
+                 bold blue => syntax "#384361",
+                 bold cyan => syntax "#384d5d",
+                 bold yellow => syntax "#544f4e"
+                   '';
+# Should match the name of the bat theme
           syntax-theme = "mocha";
 
         };
 
 
-          navigate = true;
-          line-number = true;
-          side-by-side = true;
-          features = "catppuccin-mocha";
+        navigate = true;
+        line-number = true;
+        side-by-side = true;
+        features = "catppuccin-mocha";
       };
     };
   };
@@ -153,7 +175,7 @@ programs.chromium.enable = true;
     settings = {
       background_opacity = "0.93";
       macos_option_as_alt = true; # Option key acts as Alt on macOS
-      enable_audio_bell = false;
+        enable_audio_bell = false;
       confirm_os_window_close = 0;
     };
   };
@@ -190,8 +212,8 @@ programs.chromium.enable = true;
       enable = true;
       plugins = [
         "git"
-        "thefuck"
-        "fzf"
+          "thefuck"
+          "fzf"
       ];
       theme = "bira";
     };
@@ -202,86 +224,86 @@ programs.chromium.enable = true;
     enable = true;
     settings = {
       global = {
-          monitor = 1;
-          follow = "none";
-          width = 400;
-          height = 300;
-          origin = "top-right";
-          offset = "10x36";
-          scale = 0;
-          notification_limit = 20;
-          progress_bar = true;
-          progress_bar_height = 10;
-          progress_bar_frame_width = 1;
-          progress_bar_min_width = 150;
-          progress_bar_max_width = 300;
-          progress_bar_corner_radius = 0;
-          icon_corner_radius = 0;
-          indicate_hidden = "yes";
-          transparency = 0;
-          separator_height = 2;
-          padding = 8;
-          horizontal_padding = 8;
-          text_icon_padding = 0;
-          frame_width = 3;
-          frame_color = "#89B4FA";
-          gap_size = 0;
-          separator_color = "frame";
-          sort = "yes";
-          font = "FiraCode";
-          line_height = 0;
-          markup = "full";
-          format = "<b>%s</b>\n%b";
-          alignment = "left";
-          vertical_alignment = "center";
-          show_age_threshold = 60;
-          ellipsize = "middle";
-          ignore_newline = "no";
-          stack_duplicates = true;
-          hide_duplicate_count = false;
-          show_indicators = "yes";
-          enable_recursive_icon_lookup = true;
-          icon_theme = "Adwaita";
-          icon_position = "left";
-          min_icon_size = 32;
-          max_icon_size = 128;
-          sticky_history = "yes";
-          history_length = 20;
-          #dmenu = "\"rofi -monitor 1 -combi-modes drun,run -show combi -show-icons\"";
-          browser = "${pkgs.firefox-devedition}/bin/firefox-devedition";
-          always_run_script = true;
-          title = "Dunst";
-          class = "Dunst";
-          corner_radius = 4;
-          ignore_dbusclose = false;
-          force_xwayland = false;
-          force_xinerama = false;
-          mouse_left_click = "close_current";
-          mouse_middle_click = "do_action, close_current";
-          mouse_right_click = "close_all";
+        monitor = 1;
+        follow = "none";
+        width = 400;
+        height = 300;
+        origin = "top-right";
+        offset = "10x36";
+        scale = 0;
+        notification_limit = 20;
+        progress_bar = true;
+        progress_bar_height = 10;
+        progress_bar_frame_width = 1;
+        progress_bar_min_width = 150;
+        progress_bar_max_width = 300;
+        progress_bar_corner_radius = 0;
+        icon_corner_radius = 0;
+        indicate_hidden = "yes";
+        transparency = 0;
+        separator_height = 2;
+        padding = 8;
+        horizontal_padding = 8;
+        text_icon_padding = 0;
+        frame_width = 3;
+        frame_color = "#89B4FA";
+        gap_size = 0;
+        separator_color = "frame";
+        sort = "yes";
+        font = "FiraCode";
+        line_height = 0;
+        markup = "full";
+        format = "<b>%s</b>\n%b";
+        alignment = "left";
+        vertical_alignment = "center";
+        show_age_threshold = 60;
+        ellipsize = "middle";
+        ignore_newline = "no";
+        stack_duplicates = true;
+        hide_duplicate_count = false;
+        show_indicators = "yes";
+        enable_recursive_icon_lookup = true;
+        icon_theme = "Adwaita";
+        icon_position = "left";
+        min_icon_size = 32;
+        max_icon_size = 128;
+        sticky_history = "yes";
+        history_length = 20;
+#dmenu = "\"rofi -monitor 1 -combi-modes drun,run -show combi -show-icons\"";
+        browser = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+        always_run_script = true;
+        title = "Dunst";
+        class = "Dunst";
+        corner_radius = 4;
+        ignore_dbusclose = false;
+        force_xwayland = false;
+        force_xinerama = false;
+        mouse_left_click = "close_current";
+        mouse_middle_click = "do_action, close_current";
+        mouse_right_click = "close_all";
       };
       experimental = {
-          per_monitor_dpi = false;
-        };
+        per_monitor_dpi = false;
+      };
 
       urgency_low = {
-          background = "#1E1E2E";
-          foreground = "#CDD6F4";
-          timeout = 10;
+        background = "#1E1E2E";
+        foreground = "#CDD6F4";
+        timeout = 10;
       };
 
       urgency_normal = {
-          background = "#1E1E2E";
-          foreground = "#CDD6F4";
-          timeout = 10;
-        };
+        background = "#1E1E2E";
+        foreground = "#CDD6F4";
+        timeout = 10;
+      };
 
       urgency_critical = {
-          background = "#1E1E2E";
-          foreground = "#CDD6F4";
-          frame_color = "#FAB387";
-          timeout = 0;
-        };
+        background = "#1E1E2E";
+        foreground = "#CDD6F4";
+        frame_color = "#FAB387";
+        timeout = 0;
+      };
     };
   };
 
@@ -297,4 +319,4 @@ programs.chromium.enable = true;
 
 # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
-}
+                                                     }
