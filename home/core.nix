@@ -18,8 +18,7 @@
       BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
     };
 
-    pointerCursor = 
-      let 
+    pointerCursor =  let 
       getFrom = url: hash: name: {
         gtk.enable = true;
         x11.enable = true;
