@@ -1,14 +1,14 @@
 {
-  lib,
   config,
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   neovimConfig = builtins.fetchGit {
     url = "https://github.com/cjvnjde/dotfiles.nvim.git";
     ref = "v2";
-    rev = "97e3e044ecf4a1d0a0df6ace9bcf8f7a2ca35baf";
+    rev = "5f6e688302910cd3dac8e0c7c22847907c506660";
   };
 in
 {

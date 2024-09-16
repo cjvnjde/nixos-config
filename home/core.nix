@@ -1,11 +1,12 @@
-{ inputs, config, pkgs, lib, users, username, ... }: {
+{ pkgs, username, ... }:
+{
 
   imports = [
     ./sway
-      ./waybar
-      ./rofi
-      ./bat
-      ./nvim
+    ./waybar
+    ./rofi
+    ./bat
+    ./nvim
   ];
 
   home = {
@@ -13,99 +14,116 @@
     homeDirectory = "/home/${username}";
 
     sessionVariables = {
-      XDG_CURRENT_DESKTOP = "sway"; 
-      DEFAULT_BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
-      BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+      XDG_CURRENT_DESKTOP = "sway";
+      DEFAULT_BROWSER = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+      BROWSER = "${pkgs.firefox-devedition}/bin/firefox-devedition";
     };
 
-    pointerCursor =  let 
-      getFrom = url: hash: name: {
-        gtk.enable = true;
-        x11.enable = true;
-        name = name;
-        size = 22;
-        package = 
-          pkgs.runCommand "moveUp" {} ''
-          mkdir -p $out/share/icons
-          ln -s ${pkgs.fetchzip {
-            url = url;
-            hash = hash;
-          }} $out/share/icons/${name}
-        '';
-      };
-    in
-      getFrom 
-      "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic.tar.xz"
-      "sha256-2Fd0OVSCgFZVLRAVo/MxgHp1qK5WUNhKY685XPYrBmk="
-      "Bibata-Modern-Classic";
+    pointerCursor =
+      let
+        getFrom = url: hash: name: {
+          gtk.enable = true;
+          x11.enable = true;
+          name = name;
+          size = 22;
+          package = pkgs.runCommand "moveUp" { } ''
+            mkdir -p $out/share/icons
+            ln -s ${
+              pkgs.fetchzip {
+                url = url;
+                hash = hash;
+              }
+            } $out/share/icons/${name}
+          '';
+        };
+      in
+      getFrom
+        "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic.tar.xz"
+        "sha256-2Fd0OVSCgFZVLRAVo/MxgHp1qK5WUNhKY685XPYrBmk="
+        "Bibata-Modern-Classic";
   };
-# link the configuration file in current directory to the specified location in home directory
-# home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
+  # link the configuration file in current directory to the specified location in home directory
+  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
 
-# link all files in `./scripts` to `~/.config/i3/scripts`
-# home.file.".config/i3/scripts" = {
-#   source = ./scripts;
-#   recursive = true;   # link recursively
-#   executable = true;  # make all files executable
-# };
-# Packages that should be installed to the user profile.
+  # link all files in `./scripts` to `~/.config/i3/scripts`
+  # home.file.".config/i3/scripts" = {
+  #   source = ./scripts;
+  #   recursive = true;   # link recursively
+  #   executable = true;  # make all files executable
+  # };
+  # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-# archives
+    # archives
     zip
-      unzip
-      grim
-      slurp
-      openssl
+    unzip
+    grim
+    slurp
+    openssl
 
-      file
-      xfce.thunar
-      lf
+    file
+    xfce.thunar
+    lf
     gnumake
-      
 
+    flameshot
 
-      flameshot
+    # utils
+    ripgrep # recursively searches directories for a regex pattern
+    jq # A lightweight and flexible command-line JSON processor
+    eza # A modern replacement for ‘ls’
 
-# utils
-      ripgrep # recursively searches directories for a regex pattern
-      jq # A lightweight and flexible command-line JSON processor
-      eza # A modern replacement for ‘ls’
+    jetbrains-toolbox
 
+    tldr
+    thefuck
+    atuin
+    mpv
 
-      jetbrains-toolbox
+    # development
+    nodejs_22
+    bun
+    pnpm
 
-      tldr
-      thefuck
-      atuin
-      mpv
+    wl-clipboard
+    # messaging
+    slack
+    telegram-desktop
 
-# development
-      nodejs_22
-      bun
-      pnpm
+    playerctl
 
-      wl-clipboard
-# messaging
-      slack
-      telegram-desktop
+    figma-linux
 
-      playerctl
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    font-awesome
+    source-han-sans
+    source-han-sans-japanese
+    source-han-serif-japanese
+    nerdfonts
+    rustup
+    nixfmt-rfc-style
+  ];
 
-
-      figma-linux
-
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      font-awesome
-      source-han-sans
-      source-han-sans-japanese
-      source-han-serif-japanese
-      nerdfonts
-
-    (inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.zellij)
-      ];
-
+  programs.zellij = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      #default_layout = "compact";
+      theme = "custom";
+      themes.custom.bg = "#585b70";
+      themes.custom.fg = "#cdd6f4";
+      themes.custom.red = "#f38ba8";
+      themes.custom.green = "#a6e3a1";
+      themes.custom.blue = "#89b4fa";
+      themes.custom.yellow = "#f9e2af";
+      themes.custom.magenta = "#f5c2e7";
+      themes.custom.orange = "#fab387";
+      themes.custom.cyan = "#89dceb";
+      themes.custom.black = "#181825";
+      themes.custom.white = "#cdd6f4";
+    };
+  };
   programs.firefox = {
     enable = true;
     package = pkgs.firefox-devedition;
@@ -147,12 +165,11 @@
                  bold blue => syntax "#384361",
                  bold cyan => syntax "#384d5d",
                  bold yellow => syntax "#544f4e"
-                   '';
-# Should match the name of the bat theme
+          '';
+          # Should match the name of the bat theme
           syntax-theme = "mocha";
 
         };
-
 
         navigate = true;
         line-number = true;
@@ -164,22 +181,21 @@
 
   programs.kitty = {
     enable = true;
-# kitty has catppuccin theme built-in,
-# all the built-in themes are packaged into an extra package named `kitty-themes`
-# and it's installed by home-manager if `theme` is specified.
+    # kitty has catppuccin theme built-in,
+    # all the built-in themes are packaged into an extra package named `kitty-themes`
+    # and it's installed by home-manager if `theme` is specified.
     theme = "Catppuccin-Mocha";
     font = {
       name = "FiraCode";
     };
 
-# consistent with wezterm
-    keybindings = {
-    };
+    # consistent with wezterm
+    keybindings = { };
 
     settings = {
       background_opacity = "0.93";
       macos_option_as_alt = true; # Option key acts as Alt on macOS
-        enable_audio_bell = false;
+      enable_audio_bell = false;
       confirm_os_window_close = 0;
     };
   };
@@ -201,28 +217,27 @@
     };
 
     plugins = [
-    {
-      name = "atuin";
-      src = pkgs.fetchFromGitHub {
-        owner = "atuinsh";
-        repo = "atuin";
-        rev = "main";
-        sha256 = "09j99q2ialcrhqs03661bd2gnqsjrfksj1c0bqii51mjjiml8pbq";
-      };
-    }
+      {
+        name = "atuin";
+        src = pkgs.fetchFromGitHub {
+          owner = "atuinsh";
+          repo = "atuin";
+          rev = "main";
+          sha256 = "09j99q2ialcrhqs03661bd2gnqsjrfksj1c0bqii51mjjiml8pbq";
+        };
+      }
     ];
 
     oh-my-zsh = {
       enable = true;
       plugins = [
         "git"
-          "thefuck"
-          "fzf"
+        "thefuck"
+        "fzf"
       ];
       theme = "bira";
     };
   };
-
 
   services.dunst = {
     enable = true;
@@ -273,7 +288,7 @@
         max_icon_size = 128;
         sticky_history = "yes";
         history_length = 20;
-#dmenu = "\"rofi -monitor 1 -combi-modes drun,run -show combi -show-icons\"";
+        #dmenu = "\"rofi -monitor 1 -combi-modes drun,run -show combi -show-icons\"";
         browser = "${pkgs.firefox-devedition}/bin/firefox-devedition";
         always_run_script = true;
         title = "Dunst";
@@ -311,16 +326,16 @@
     };
   };
 
-# This value determines the home Manager release that your
-# configuration is compatible with. This helps avoid breakage
-# when a new home Manager release introduces backwards
-# incompatible changes.
-#
-# You can update home Manager without changing this value. See
-# the home Manager release notes for a list of state version
-# changes in each release.
+  # This value determines the home Manager release that your
+  # configuration is compatible with. This helps avoid breakage
+  # when a new home Manager release introduces backwards
+  # incompatible changes.
+  #
+  # You can update home Manager without changing this value. See
+  # the home Manager release notes for a list of state version
+  # changes in each release.
   home.stateVersion = "24.05";
 
-# Let home Manager install and manage itself.
+  # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
-                                                     }
+}

@@ -2,13 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -45,22 +45,22 @@
   };
 
   # Enable the X11 windowing system.
-#  services.xserver.enable = true;
+  #  services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-#  services.xserver.displayManager.gdm.enable = false;
-#  services.xserver.desktopManager.gnome.enable = false;
-#  services.displayManager.ly.enable = true;
-  services.greetd = {                                                      
-    enable = true;                                                         
-    settings = {                                                           
-      default_session = {                                                  
+  #  services.xserver.displayManager.gdm.enable = false;
+  #  services.xserver.desktopManager.gnome.enable = false;
+  #  services.displayManager.ly.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-      };                                                                   
-    };                                                                     
+      };
+    };
   };
 
-# Configure keymap in X11
+  # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "dvorak";
@@ -95,15 +95,22 @@
   users.users.cjvnjde = {
     isNormalUser = true;
     description = "Vitalij Nykyforenko";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -114,146 +121,145 @@
     gcc
   ];
 
+  xdg.mime.defaultApplications = {
+    "text/html" = "firefox-devedition.desktop";
+    "x-scheme-handler/http" = "firefox-devedition.desktop";
+    "x-scheme-handler/https" = "firefox-devedition.desktop";
+    "x-scheme-handler/about" = "firefox-devedition.desktop";
+    "x-scheme-handler/unknown" = "firefox-devedition.desktop";
+  };
 
-xdg.mime.defaultApplications = {
-  "text/html" = "firefox-devedition.desktop";
-  "x-scheme-handler/http" = "firefox-devedition.desktop";
-  "x-scheme-handler/https" = "firefox-devedition.desktop";
-  "x-scheme-handler/about" = "firefox-devedition.desktop";
-  "x-scheme-handler/unknown" = "firefox-devedition.desktop";
-};
+  environment.sessionVariables = {
+    XDG_CURRENT_DESKTOP = "sway";
+    DEFAULT_BROWSER = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+    BROWSER = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+  };
 
-    environment.sessionVariables = {
-  XDG_CURRENT_DESKTOP = "sway"; 
-      DEFAULT_BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
-      BROWSER  = "${pkgs.firefox-devedition}/bin/firefox-devedition";
-    };
-
-programs.steam = {
-  enable = true;
-  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-};
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
   programs.nix-ld.enable = true;
-    programs.nix-ld.libraries = with pkgs; [
-      SDL
-      SDL2
-      SDL2_image
-      SDL2_mixer
-      SDL2_ttf
-      SDL_image
-      SDL_mixer
-      SDL_ttf
-      alsa-lib
-      at-spi2-atk
-      at-spi2-core
-      atk
-      bzip2
-      cairo
-      cups
-      curlWithGnuTls
-      dbus
-      dbus-glib
-      desktop-file-utils
-      e2fsprogs
-      expat
-      flac
-      fontconfig
-      freeglut
-      freetype
-      fribidi
-      fuse
-      fuse3
-      gdk-pixbuf
-      glew110
-      glib
-      gmp
-      gst_all_1.gst-plugins-base
-      gst_all_1.gst-plugins-ugly
-      gst_all_1.gstreamer
-      gtk2
-      harfbuzz
-      icu
-      keyutils.lib
-      libGL
-      libGLU
-      libappindicator-gtk2
-      libcaca
-      libcanberra
-      libcap
-      libclang.lib
-      libdbusmenu
-      libdrm
-      libgcrypt
-      libgpg-error
-      libidn
-      libjack2
-      libjpeg
-      libmikmod
-      libogg
-      libpng12
-      libpulseaudio
-      librsvg
-      libsamplerate
-      libthai
-      libtheora
-      libtiff
-      libudev0-shim
-      libusb1
-      libuuid
-      libvdpau
-      libvorbis
-      libvpx
-      libxcrypt-legacy
-      libxkbcommon
-      libxml2
-      mesa
-      nspr
-      nss
-      openssl
-      p11-kit
-      pango
-      pixman
-      python3
-      speex
-      stdenv.cc.cc
-      tbb
-      udev
-      vulkan-loader
-      wayland
-      xorg.libICE
-      xorg.libSM
-      xorg.libX11
-      xorg.libXScrnSaver
-      xorg.libXcomposite
-      xorg.libXcursor
-      xorg.libXdamage
-      xorg.libXext
-      xorg.libXfixes
-      xorg.libXft
-      xorg.libXi
-      xorg.libXinerama
-      xorg.libXmu
-      xorg.libXrandr
-      xorg.libXrender
-      xorg.libXt
-      xorg.libXtst
-      xorg.libXxf86vm
-      xorg.libpciaccess
-      xorg.libxcb
-      xorg.xcbutil
-      xorg.xcbutilimage
-      xorg.xcbutilkeysyms
-      xorg.xcbutilrenderutil
-      xorg.xcbutilwm
-      xorg.xkeyboardconfig
-      xz
-      zlib
-      jdk22
-      libsecret
-    ];
+  programs.nix-ld.libraries = with pkgs; [
+    SDL
+    SDL2
+    SDL2_image
+    SDL2_mixer
+    SDL2_ttf
+    SDL_image
+    SDL_mixer
+    SDL_ttf
+    alsa-lib
+    at-spi2-atk
+    at-spi2-core
+    atk
+    bzip2
+    cairo
+    cups
+    curlWithGnuTls
+    dbus
+    dbus-glib
+    desktop-file-utils
+    e2fsprogs
+    expat
+    flac
+    fontconfig
+    freeglut
+    freetype
+    fribidi
+    fuse
+    fuse3
+    gdk-pixbuf
+    glew110
+    glib
+    gmp
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gstreamer
+    gtk2
+    harfbuzz
+    icu
+    keyutils.lib
+    libGL
+    libGLU
+    libappindicator-gtk2
+    libcaca
+    libcanberra
+    libcap
+    libclang.lib
+    libdbusmenu
+    libdrm
+    libgcrypt
+    libgpg-error
+    libidn
+    libjack2
+    libjpeg
+    libmikmod
+    libogg
+    libpng12
+    libpulseaudio
+    librsvg
+    libsamplerate
+    libthai
+    libtheora
+    libtiff
+    libudev0-shim
+    libusb1
+    libuuid
+    libvdpau
+    libvorbis
+    libvpx
+    libxcrypt-legacy
+    libxkbcommon
+    libxml2
+    mesa
+    nspr
+    nss
+    openssl
+    p11-kit
+    pango
+    pixman
+    python3
+    speex
+    stdenv.cc.cc
+    tbb
+    udev
+    vulkan-loader
+    wayland
+    xorg.libICE
+    xorg.libSM
+    xorg.libX11
+    xorg.libXScrnSaver
+    xorg.libXcomposite
+    xorg.libXcursor
+    xorg.libXdamage
+    xorg.libXext
+    xorg.libXfixes
+    xorg.libXft
+    xorg.libXi
+    xorg.libXinerama
+    xorg.libXmu
+    xorg.libXrandr
+    xorg.libXrender
+    xorg.libXt
+    xorg.libXtst
+    xorg.libXxf86vm
+    xorg.libpciaccess
+    xorg.libxcb
+    xorg.xcbutil
+    xorg.xcbutilimage
+    xorg.xcbutilkeysyms
+    xorg.xcbutilrenderutil
+    xorg.xcbutilwm
+    xorg.xkeyboardconfig
+    xz
+    zlib
+    jdk22
+    libsecret
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
