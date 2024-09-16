@@ -60,8 +60,11 @@
       file
       xfce.thunar
       lf
+    gnumake
+      
 
-#flameshot
+
+      flameshot
 
 # utils
       ripgrep # recursively searches directories for a regex pattern
