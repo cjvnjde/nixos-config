@@ -102,6 +102,8 @@
       source-han-sans-japanese
       source-han-serif-japanese
       nerdfonts
+
+    (inputs.nixpkgs-unstable.legacyPackages.${pkgs.system}.zellij)
       ];
 
   programs.firefox = {
