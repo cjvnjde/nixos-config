@@ -42,18 +42,8 @@
         "sha256-2Fd0OVSCgFZVLRAVo/MxgHp1qK5WUNhKY685XPYrBmk="
         "Bibata-Modern-Classic";
   };
-  # link the configuration file in current directory to the specified location in home directory
-  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
 
-  # link all files in `./scripts` to `~/.config/i3/scripts`
-  # home.file.".config/i3/scripts" = {
-  #   source = ./scripts;
-  #   recursive = true;   # link recursively
-  #   executable = true;  # make all files executable
-  # };
-  # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    # archives
     zip
     unzip
     grim
@@ -67,10 +57,9 @@
 
     flameshot
 
-    # utils
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    eza # A modern replacement for ‘ls’
+    ripgrep
+    jq
+    eza
 
     jetbrains-toolbox
 
@@ -79,13 +68,11 @@
     atuin
     mpv
 
-    # development
     nodejs_22
     bun
     pnpm
 
     wl-clipboard
-    # messaging
     slack
     telegram-desktop
 
@@ -103,11 +90,12 @@
     nerdfonts
     rustup
     nixfmt-rfc-style
+    godot_4 
+    gimp
   ];
 
   programs.zellij = {
     enable = true;
-    enableZshIntegration = true;
     settings = {
       #default_layout = "compact";
       theme = "custom";
