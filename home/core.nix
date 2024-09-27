@@ -52,6 +52,8 @@
     ffmpeg_7-full
     inkscape
     krita
+    aseprite
+    audacity
 
     file
     xfce.thunar
