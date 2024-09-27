@@ -51,6 +51,7 @@
     openssl
     ffmpeg_7-full
     inkscape
+    krita
 
     file
     xfce.thunar
