@@ -49,6 +49,8 @@
     grim
     slurp
     openssl
+    ffmpeg_7-full
+    inkscape
 
     file
     xfce.thunar
