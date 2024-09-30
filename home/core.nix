@@ -50,6 +50,8 @@
 
   home.packages = with pkgs; [
     yt-dlp
+    gnome.adwaita-icon-theme
+    xournalpp
     zip
     unzip
     grim
