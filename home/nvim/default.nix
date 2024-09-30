@@ -8,7 +8,7 @@ let
   neovimConfig = builtins.fetchGit {
     url = "https://github.com/cjvnjde/dotfiles.nvim.git";
     ref = "v2";
-    rev = "c6e8d2ed409d6ff2a2280e6c4bc45fdcfccbf640";
+    rev = "349c5ec7ec05c5cdecbcc7ff9f7850cf8c572885";
   };
 in
 {

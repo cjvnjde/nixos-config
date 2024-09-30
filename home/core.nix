@@ -1,4 +1,9 @@
-{ pkgs, username, inputs, ... }:
+{
+  pkgs,
+  username,
+  inputs,
+  ...
+}:
 {
 
   imports = [
@@ -96,7 +101,7 @@
     nerdfonts
     rustup
     nixfmt-rfc-style
-    godot_4 
+    godot_4
     gimp
 
     inputs.zen-browser.packages."${system}".specific
