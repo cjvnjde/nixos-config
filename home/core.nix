@@ -1,4 +1,4 @@
-{ pkgs, username, ... }:
+{ pkgs, username, inputs, ... }:
 {
 
   imports = [
@@ -44,6 +44,7 @@
   };
 
   home.packages = with pkgs; [
+    yt-dlp
     zip
     unzip
     grim
@@ -97,6 +98,8 @@
     nixfmt-rfc-style
     godot_4 
     gimp
+
+    inputs.zen-browser.packages."${system}".specific
   ];
 
   programs.zellij = {
