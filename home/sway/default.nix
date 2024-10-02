@@ -133,7 +133,7 @@
         export GDK_SCALE=1
         export GDK_DPI_SCALE=1
         export MOZ_ENABLE_WAYLAND=1
-        export BROWSER=firefox-devedition
+        export BROWSER=zen
       '';
       wrapperFeatures = {
         base = true;

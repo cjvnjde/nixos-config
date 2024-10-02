@@ -2,8 +2,10 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
-
+{ pkgs, inputs, ... }:
+let
+  browser_path = "${inputs.zen-browser.packages."${pkgs.system}".specific}/bin/zen";
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -122,17 +124,17 @@
   ];
 
   xdg.mime.defaultApplications = {
-    "text/html" = "firefox-devedition.desktop";
-    "x-scheme-handler/http" = "firefox-devedition.desktop";
-    "x-scheme-handler/https" = "firefox-devedition.desktop";
-    "x-scheme-handler/about" = "firefox-devedition.desktop";
-    "x-scheme-handler/unknown" = "firefox-devedition.desktop";
+    "text/html" = "zen.desktop";
+    "x-scheme-handler/http" = "zen.desktop";
+    "x-scheme-handler/https" = "zen.desktop";
+    "x-scheme-handler/about" = "zen.desktop";
+    "x-scheme-handler/unknown" = "zen.desktop";
   };
 
   environment.sessionVariables = {
     XDG_CURRENT_DESKTOP = "sway";
-    DEFAULT_BROWSER = "${pkgs.firefox-devedition}/bin/firefox-devedition";
-    BROWSER = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+    DEFAULT_BROWSER = browser_path;
+    BROWSER = browser_path;
   };
 
   programs.steam = {

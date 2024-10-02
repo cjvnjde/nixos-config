@@ -4,6 +4,9 @@
   inputs,
   ...
 }:
+let
+  browser_path = "${inputs.zen-browser.packages."${pkgs.system}".specific}/bin/zen";
+in
 {
 
   imports = [
@@ -20,8 +23,8 @@
 
     sessionVariables = {
       XDG_CURRENT_DESKTOP = "sway";
-      DEFAULT_BROWSER = "${pkgs.firefox-devedition}/bin/firefox-devedition";
-      BROWSER = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+      DEFAULT_BROWSER = browser_path;
+      BROWSER = browser_path;
     };
 
     pointerCursor =
@@ -292,7 +295,7 @@
         sticky_history = "yes";
         history_length = 20;
         #dmenu = "\"rofi -monitor 1 -combi-modes drun,run -show combi -show-icons\"";
-        browser = "${pkgs.firefox-devedition}/bin/firefox-devedition";
+        browser = browser_path;
         always_run_script = true;
         title = "Dunst";
         class = "Dunst";
