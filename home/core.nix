@@ -5,7 +5,7 @@
   ...
 }:
 let
-  browser_path = "${inputs.zen-browser.packages."${pkgs.system}".specific}/bin/zen";
+  browser_path = "${pkgs.firefox-devedition}/bin/firefox-devedition";
 in
 {
 

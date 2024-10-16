@@ -75,6 +75,7 @@
             "${modifier}+Shift+f" = "floating toggle";
             "${modifier}+t" = "focus mode_toggle";
             "Print" = "exec $screenshot";
+            "Shift+Print" = "exec $screenshot_all";
           };
         colors = {
           focused = {
@@ -122,6 +123,7 @@
         set $screenshot 'grim -g "$(slurp)" - | wl-copy'
         # set $screenshot 'XDG_CURRENT_DESKTOP=Sway QT_QPA_PLATFORM=wayland flameshot gui --clipboard --path $screenshots_path'
         # for_window [title="flameshot" app_id="flameshot"] fullscreen enable global
+        set $screenshot_all 'grim - | wl-copy'
       '';
       extraSessionCommands = ''
         export XDG_SESSION_TYPE=wayland
@@ -133,7 +135,7 @@
         export GDK_SCALE=1
         export GDK_DPI_SCALE=1
         export MOZ_ENABLE_WAYLAND=1
-        export BROWSER=zen
+        export BROWSER=firefox-devedition
       '';
       wrapperFeatures = {
         base = true;

@@ -2,9 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 let
-  browser_path = "${inputs.zen-browser.packages."${pkgs.system}".specific}/bin/zen";
+  browser_path = "${pkgs.firefox-devedition}/bin/firefox-devedition";
 in
 {
   imports = [
@@ -102,9 +102,6 @@ in
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
   };
 
   # Allow unfree packages
@@ -124,11 +121,11 @@ in
   ];
 
   xdg.mime.defaultApplications = {
-    "text/html" = "zen.desktop";
-    "x-scheme-handler/http" = "zen.desktop";
-    "x-scheme-handler/https" = "zen.desktop";
-    "x-scheme-handler/about" = "zen.desktop";
-    "x-scheme-handler/unknown" = "zen.desktop";
+    "text/html" = "firefox-devedition.desktop";
+    "x-scheme-handler/http" = "firefox-devedition.desktop";
+    "x-scheme-handler/https" = "firefox-devedition.desktop";
+    "x-scheme-handler/about" = "firefox-devedition.desktop";
+    "x-scheme-handler/unknown" = "firefox-devedition.desktop";
   };
 
   environment.sessionVariables = {
