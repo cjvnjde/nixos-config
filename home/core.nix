@@ -108,26 +108,74 @@ in
     nixfmt-rfc-style
     godot_4
     gimp
-
+    postman
     inputs.zen-browser.packages."${system}".specific
   ];
 
   programs.zellij = {
     enable = true;
+    enableZshIntegration = true;
     settings = {
-      #default_layout = "compact";
-      theme = "custom";
-      themes.custom.bg = "#585b70";
-      themes.custom.fg = "#cdd6f4";
-      themes.custom.red = "#f38ba8";
-      themes.custom.green = "#a6e3a1";
-      themes.custom.blue = "#89b4fa";
-      themes.custom.yellow = "#f9e2af";
-      themes.custom.magenta = "#f5c2e7";
-      themes.custom.orange = "#fab387";
-      themes.custom.cyan = "#89dceb";
-      themes.custom.black = "#181825";
-      themes.custom.white = "#cdd6f4";
+      keybinds = {
+        "normal clear-defaults=true" = {
+          "bind \"Ctrl b\"" = {
+            SwitchToMode = "Tmux";
+          };
+        };
+        "tmux clear-defaults=true" = {
+          "bind \"Ctrl f\"" = {
+            Write = 2;
+            SwitchToMode = "Normal";
+          };
+          "bind \"Esc\"" = {
+            SwitchToMode = "Normal";
+          };
+          "bind \"g\"" = {
+            SwitchToMode = "Locked";
+          };
+          "bind \"p\"" = {
+            SwitchToMode = "Pane";
+          };
+          "bind \"t\"" = {
+            SwitchToMode = "Tab";
+          };
+          "bind \"n\"" = {
+            SwitchToMode = "Resize";
+          };
+          "bind \"h\"" = {
+            SwitchToMode = "Move";
+          };
+          "bind \"s\"" = {
+            SwitchToMode = "Scroll";
+          };
+          "bind \"o\"" = {
+            SwitchToMode = "Session";
+          };
+          "bind \"q\"" = {
+            Quit = { };
+          };
+        };
+      };
+
+      theme = "catppuccin-mocha";
+
+      themes = {
+        catppuccin-mocha = {
+          bg = "#585b70";
+          fg = "#cdd6f4";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          blue = "#89b4fa";
+          yellow = "#f9e2af";
+          magenta = "#f5c2e7";
+          orange = "#fab387";
+          cyan = "#89dceb";
+          black = "#181825";
+          white = "#cdd6f4";
+        };
+      };
+
+      pane_frames = false;
     };
   };
   programs.firefox = {
