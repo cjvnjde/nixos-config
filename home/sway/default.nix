@@ -39,6 +39,27 @@
           names = [ "FiraCode" ];
         };
         defaultWorkspace = "workspace number 1";
+        output = {
+          HDMI-A-1 = {
+            bg = "./assets/bg.jpg fill";
+            resolution = "1920x1080";
+            #  1440 - 1080 = 360
+            position = "0,360";
+          };
+          DP-1 = {
+            bg = "./assets/bg.jpg fill";
+            resolution = "2560x1440";
+            # ||===
+            # 1920 / 2 = 960
+            # 1440 / 2 = 720
+            # 960 - 720 = 240
+            # position = "1080,240"; #x, y
+            # == ===
+            # position = "1920,0";
+
+            position = "1920,0";
+          };
+        };
         input = {
           "type:keyboard" = {
             xkb_layout = "us,ru";
