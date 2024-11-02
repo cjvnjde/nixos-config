@@ -110,6 +110,8 @@ in
     gimp
     postman
     inputs.zen-browser.packages."${system}".specific
+
+    postgresql
   ];
 
   programs.zellij = {
